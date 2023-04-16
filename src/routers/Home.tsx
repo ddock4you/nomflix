@@ -88,7 +88,7 @@ const Home = () => {
     ];
 
     const onBoxClicked = (id: number) => {
-        history.push(`/movies/${id}`);
+        history.push(`/nomflix/movies/${id}`);
     };
 
     return (

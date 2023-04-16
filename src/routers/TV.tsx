@@ -88,7 +88,7 @@ const TV = () => {
     ];
 
     const onBoxClicked = (id: number) => {
-        history.push(`/tvs/${id}`);
+        history.push(`/nomflix/tvs/${id}`);
     };
 
     return (

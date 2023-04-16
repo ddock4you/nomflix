@@ -27,8 +27,9 @@ const Row = styled(motion.div)`
     width: 100%;
 `;
 
-const Box = styled(motion.div)<{ bgphoto: string }>`
-    background-color: white;
+const Box = styled(motion.div)<{ bgphoto: string | null }>`
+    position: relative;
+    background-color: #000;
     background-image: url(${(props) => props.bgphoto});
     background-size: cover;
     background-position: center center;
@@ -40,6 +41,16 @@ const Box = styled(motion.div)<{ bgphoto: string }>`
     }
     &:last-child {
         transform-origin: center right;
+    }
+    &::before {
+        content: "등록된 이미지가 없습니다.";
+        display: ${({ bgphoto }) => (bgphoto ? "none" : "block")};
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 12px;
+        color: #ddd;
     }
 `;
 
@@ -163,7 +174,7 @@ const Slider = ({
 
     const toggleLeaving = () => setLeaving((prev) => !prev);
     const onBoxClicked = (id: number) => {
-        history.push(`/${path}/${id}`);
+        history.push(`/nomflix/${path}/${id}`);
     };
 
     return list?.results && list?.results.length > 0 ? (
@@ -197,10 +208,14 @@ const Slider = ({
                                 initial="normal"
                                 variants={boxVariants}
                                 transition={{ type: "tween" }}
-                                bgphoto={makeImagePath(
-                                    movie.backdrop_path,
-                                    "w500"
-                                )}
+                                bgphoto={
+                                    movie.backdrop_path
+                                        ? makeImagePath(
+                                              movie.backdrop_path,
+                                              "w500"
+                                          )
+                                        : null
+                                }
                                 onClick={() => onBoxClicked(movie.id)}
                             >
                                 <Info variants={infoVariants}>

@@ -57,7 +57,7 @@ const BigOverview = styled.p`
 
 const Popup = ({ allMovies, path }: { allMovies: IMovie[]; path: string }) => {
     const history = useHistory();
-    const bigMovieMatch = useRouteMatch<{ id: string }>(`/${path}/:id`);
+    const bigMovieMatch = useRouteMatch<{ id: string }>(`/nomflix/${path}/:id`);
 
     const onOverlayClick = () => {
         history.goBack();
